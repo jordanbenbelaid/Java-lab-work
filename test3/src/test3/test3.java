@@ -9,20 +9,30 @@ public class test3 {
 		
 		salary = 900;
 		
-		if(salary <= 1000)
+		if(salary > 1000)
+		{
+			if(salary > 2000)
+			{
+				if(salary > 3000)
+				{
+					tax = salary*30/100;
+				}
+				
+				else
+				{
+					tax = salary*21/100;
+				}
+			}
+			else
+			{
+				tax = salary*15/100;
+			}
+		}
+		else
 		{
 			tax = 0;
 		}
-		
-		if(salary>1000 && salary <= 2000)
-		{
-			tax = (float)salary*17/100;
-		}
-		
-		if(salary > 2000)
-		{
-			tax = (float)salary*21/100;
-		}
+			
 		
 		netPay = salary - tax;
 		
