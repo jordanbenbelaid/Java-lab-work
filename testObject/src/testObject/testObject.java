@@ -13,6 +13,7 @@ public class testObject {
 		System.out.println(x.physics + x.chem + x.maths);
 		
 		
+		System.out.println("=================================");
 		System.out.println("                                 ");
 		
 		
@@ -21,6 +22,7 @@ public class testObject {
 		m.printing();
 		
 		
+		System.out.println("=================================");
 		System.out.println("                                 ");
 		
 		
@@ -29,19 +31,31 @@ public class testObject {
 		f.subtract(95, 47);
 		f.divide(100, 25);
 		f.multiply(6,3);
+		f.printTimesTables(5);
 		
 		
+		System.out.println("=================================");
 		System.out.println("                                 ");
 		
 		
 		Accounts a = new Accounts();
-		a.tax(20394);
+		a.tax(20000);
 		
 		
+		System.out.println("=================================");
 		System.out.println("                                 ");
 		
 		
-		f.printTimesTables(5);
+		Accounts2 a2 = new Accounts2();
+		
+		float netsalary;
+		int salary;
+		
+		System.out.println(a2.tax2(20000));
+		
+		salary = 20000;
+		netsalary = salary - a2.tax2(salary);
+		System.out.println(netsalary);
 	}
 
 }
