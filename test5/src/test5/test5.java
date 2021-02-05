@@ -33,6 +33,8 @@ public class test5 {
 			System.out.println(d + " " + e + " " + f);
 		}
 		
+		System.out.println("==========================================");
+		
 		
 	}
 }
