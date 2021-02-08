@@ -5,18 +5,20 @@ public class Results {
 		// TODO Auto-generated method stub
 		
 		ShowResults jordan = new ShowResults();
-		ShowResults james = new ShowResults();
+	//	ShowResults james = new ShowResults();
 		
 		
-		jordan.chemistry = 93;
-		jordan.physics = 85;
+		jordan.Chemistry(30);
+		jordan.Physics(83);
+		jordan.Maths(48);
 		jordan.name = "Jordan";
 		jordan.showResults();
 		
-		james.chemistry = 103;
-		james.physics = 59;
-		james.name = "James";
-		james.showResults();
+//		james.Chemistry(95);
+//		james.Physics(100);
+//		james.Maths(82);
+//		james.name = "James";
+//		james.showResults();
 	}
 
 }
