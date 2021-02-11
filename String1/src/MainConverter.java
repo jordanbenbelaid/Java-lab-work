@@ -6,7 +6,7 @@ public class MainConverter {
 		
 		DigitToWords d = new DigitToWords();
 		
-		d.Convert(0);
+		d.Convert(3456);
 	}
 
 }

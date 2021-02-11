@@ -21,7 +21,7 @@ public class DigitToWords {
 		}
 		
 		if(a>=20) {
-			result += tensConverter(a/10*10)+ " ";
+			result += tensConverter(a/10)+ " ";
 			a%=10;
 		}
 		
@@ -125,28 +125,28 @@ public class DigitToWords {
 		String num2 = "";
 		
 		switch (tens) {
-		case 20:
+		case 2:
 			num2 = "Twenty";
 			break;
-		case 30:
+		case 3:
 			num2 = "Thirty";
 			break;
-		case 40:
+		case 4:
 			num2 = "Forty";
 			break;
-		case 50:
+		case 5:
 			num2 = "Fifty";
 			break;
-		case 60:
+		case 6:
 			num2 = "Sixty";
 			break;
-		case 70:
+		case 7:
 			num2 = "Seventy";
 			break;
-		case 80:
+		case 8:
 			num2 = "Eighty";
 			break;
-		case 90:
+		case 9:
 			num2 = "Ninety";
 			break;
 		default:
