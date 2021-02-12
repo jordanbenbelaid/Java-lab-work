@@ -22,7 +22,10 @@ public class Start {
 		System.out.println("=================================");
 		
 		s.FindCount("Hello, i want to sayHello, because it is a nice thing to sayHello", "Hello");
+		System.out.println("=================================");
 		
+		s.RemoveDuplicates("Hello Hello Hello my friend John");
+		System.out.println("=================================");
 	}
 
 }
