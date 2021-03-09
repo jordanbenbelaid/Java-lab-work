@@ -13,7 +13,7 @@ public class ItemUnitTest {
 		
 		assertNotNull(item);
 	}
-
+	
 	@Test
 	public void itemGetNameTest() {
 		String name = "Freddo";

@@ -67,7 +67,7 @@ public class Runner {
 				break;
 
 			case "exit":
-				System.out.println("BYe...");
+				System.out.println("Bye...");
 				dbQuery.tearDown();
 				scanner.close();
 				System.exit(0);
