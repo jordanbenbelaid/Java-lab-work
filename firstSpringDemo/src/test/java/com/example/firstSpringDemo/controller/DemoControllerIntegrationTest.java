@@ -23,11 +23,13 @@ import com.example.firstSpringDemo.mappers.DemoMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+//by default, @SpringBootTest only launches the application context
+//- specify a port, it will also launch the Tomcat server on the specified port
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) 	//we actually open the server here
 @AutoConfigureMockMvc 		//configures mockmvc object(used to send requests to api)
 @Sql(scripts = {"classpath:test-schema.sql", "classpath:test-data.sql"}, 
 		executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class DuckControllerIntegrationTest {
+public class DemoControllerIntegrationTest {
 
 	@Autowired
 	private MockMvc mvc; 		//we use this to send http request

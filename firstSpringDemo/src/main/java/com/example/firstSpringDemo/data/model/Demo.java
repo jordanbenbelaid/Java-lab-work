@@ -2,9 +2,12 @@ package com.example.firstSpringDemo.data.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -20,7 +23,7 @@ public class Demo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "name", unique = true)
+	@Column(name = "duck_id", unique = true)
 	private String name;
 	
 	@NotNull
@@ -32,6 +35,10 @@ public class Demo {
 	@Min(0)
 	@Max(50)
 	private int age;
+	
+	@ManyToOne(targetEntity = Pond.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_pond_id") 	//indicates duck is owner or relational column
+	private Pond pond;
 	
 	public Demo() {
 		
@@ -55,7 +62,25 @@ public class Demo {
 	}
 	
 	
-	
+	public Demo(int id, String name, @NotNull String colour, @NotNull String habitat, @Min(0) @Max(50) int age,
+			Pond pond) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.colour = colour;
+		this.habitat = habitat;
+		this.age = age;
+		this.pond = pond;
+	}
+
+	public Pond getPond() {
+		return pond;
+	}
+
+	public void setPond(Pond pond) {
+		this.pond = pond;
+	}
+
 	public int getId() {
 		return id;
 	}

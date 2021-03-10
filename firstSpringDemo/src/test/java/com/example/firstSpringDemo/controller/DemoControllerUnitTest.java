@@ -12,16 +12,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.example.firstSpringDemo.data.model.Demo;
 import com.example.firstSpringDemo.DTO.DemoDTO;
+import com.example.firstSpringDemo.data.model.Demo;
 import com.example.firstSpringDemo.service.DemoService;
 
 @SpringBootTest
@@ -84,10 +82,10 @@ public class DemoControllerUnitTest {
 	@Test
 	public void deleteDuckTest() {
 		//we mock delete duck
-		when(demoService.deleteDemo(Mockito.any(Integer.class))).thenReturn(true);
-		
+//		when(demoService.deleteDemo(Mockito.any(Integer.class))).thenReturn(true);
+	
 		//expected response
-		ResponseEntity<Boolean> response = new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		ResponseEntity<String> response = new ResponseEntity<String>("Duck deleted", HttpStatus.OK);
 		
 		assertThat(response).isEqualTo(demoController.deleteDemo(validDemo.getId()));
 		
