@@ -1,4 +1,4 @@
-package exceptions;
+package com.example.firstSpringDemo.exceptions;
 
 import javax.persistence.EntityNotFoundException;
 

@@ -1,5 +1,6 @@
 package com.example.firstSpringDemo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,51 +9,72 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.model.Demo;
-import data.repository.DemoRepository;
-import exceptions.FunnyDemoNotFoundException;
-import exceptions.RudeDemoNotFoundException;
+import com.example.firstSpringDemo.DTO.DemoDTO;
+import com.example.firstSpringDemo.data.model.Demo;
+import com.example.firstSpringDemo.data.repository.DemoRepository;
+import com.example.firstSpringDemo.exceptions.FunnyDemoNotFoundException;
+import com.example.firstSpringDemo.exceptions.RudeDemoNotFoundException;
+import com.example.firstSpringDemo.mappers.DemoMapper;
 
 @Service // labelled as bean (managed by spring)
 public class DemoService {
 
 	// data access object
 	private DemoRepository demoRepository;
+	private DemoMapper demoMapper;
 
 	@Autowired
-	public DemoService(DemoRepository demoRepository) {
+	public DemoService(DemoRepository demoRepository, DemoMapper demoMapper) {
 		this.demoRepository = demoRepository;
+		this.demoMapper = demoMapper;
 	}
 
-	public List<Demo> readAllDemos() {
+	public List<DemoDTO> readAllDemos() {
 		List<Demo> demos = demoRepository.findAll();
-		return demos;
+		List<DemoDTO> demoDTOs = new ArrayList<DemoDTO>();
+		
+		demos.forEach(demo -> demoDTOs.add(demoMapper.mapToDTO(demo)));
+		
+		return demoDTOs;
 	}
 
-	public Demo readById(int id) {
+	public DemoDTO readById(int id) {
 		Optional<Demo> demo = demoRepository.findById(id);
 
 		if (demo.isPresent()) {
-			return demo.get();
+			return demoMapper.mapToDTO(demo.get());
 		} else {
 			throw new RudeDemoNotFoundException();
 		}
 	}
-
-	public Demo createDemo(Demo demo) {
-		Demo newDemo = demoRepository.save(demo);
-		return newDemo;
+	
+	public DemoDTO readByName(String name) {
+		Demo demo = demoRepository.getDemoByNameJPQL();
+		return demoMapper.mapToDTO(demo);
 	}
 
-	public Demo updateDemo(int id, Demo demo) throws EntityNotFoundException {
-		Demo updateDemo = demoRepository.getOne(id);
+	public DemoDTO createDemo(Demo demo) {
+		Demo newDemo = demoRepository.save(demo);
+		return demoMapper.mapToDTO(newDemo);
+	}
 
-		updateDemo.setName(demo.getName());
-		updateDemo.setColour(demo.getColour());
-		updateDemo.setAge(demo.getAge());
-		updateDemo.setHabitat(demo.getHabitat());
+	public DemoDTO updateDemo(int id, Demo demo) throws EntityNotFoundException {
+		Optional<Demo> demoInDbOpt = demoRepository.findById(id);
+		Demo demoInDb;
+		
+		if (demoInDbOpt.isPresent()) {
+			demoInDb = demoInDbOpt.get();
+		} else {
+			throw new RudeDemoNotFoundException();
+		}
 
-		return updateDemo;
+		demoInDb.setName(demo.getName());
+		demoInDb.setColour(demo.getColour());
+		demoInDb.setAge(demo.getAge());
+		demoInDb.setHabitat(demo.getHabitat());
+
+		Demo updatedDemo = demoRepository.save(demoInDb);
+		return demoMapper.mapToDTO(updatedDemo);
 	}
 
 	public void deleteDemo(int id) {

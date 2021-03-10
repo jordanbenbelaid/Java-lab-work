@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.firstSpringDemo.DTO.DemoDTO;
+import com.example.firstSpringDemo.data.model.Demo;
 import com.example.firstSpringDemo.service.DemoService;
-
-import data.model.Demo;
 
 @RestController 			//type of bean, convenience annotation for creatin restful controllers
 							//Special version on @component, and it combines @Controller and @responsebody
@@ -28,27 +28,27 @@ import data.model.Demo;
 public class DemoController {
 	
 	//FIELD INJECTION
-	@Autowired
+//	@Autowired
 	private DemoService demoService;
 	
 	//CONSTRUCTOR INJECTION
-//	@Autowired
-//	public DemoController(DemoService demoService) {
-//		this.demoService = demoService; 	//we dont want to create this ourselves, so we pass it in bean method
-//	}
+	@Autowired
+	public DemoController(DemoService demoService) {
+		this.demoService = demoService; 	//we dont want to create this ourselves, so we pass it in bean method
+	}
 	
 //	@RequestMapping(path = "/", method = RequestMethod.GET) 		//old way of doing
 	//localhost:8080/duck       getting all ducks method
 	@GetMapping
-	public ResponseEntity<List<Demo>> getAllDemos(){
+	public ResponseEntity<List<DemoDTO>> getAllDemos(){
 		
 		//response has headers, a body and status code
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Location", "1442");
 		
-		List<Demo> data = demoService.readAllDemos();
+		List<DemoDTO> data = demoService.readAllDemos();
 		//ResponseEntity body, headers, httpStatus
-		return new ResponseEntity<List<Demo>>(data, httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<List<DemoDTO>>(data, httpHeaders, HttpStatus.OK);
 	}
 	
 	//localhost:8080/duck/1 		shows duck with id 1 (e.g)
@@ -57,35 +57,43 @@ public class DemoController {
 	
 	//getting a specific duck
 	@GetMapping("/{id}")
-	public ResponseEntity<Demo> getDemoById(@PathVariable("id") int id) throws Exception{
-		Demo demo = demoService.readById(id);
+	public ResponseEntity<DemoDTO> getDemoById(@PathVariable("id") int id) throws Exception{
+		DemoDTO demo = demoService.readById(id);
 		
-		return new ResponseEntity<Demo>(demo, HttpStatus.OK);
+		return new ResponseEntity<DemoDTO>(demo, HttpStatus.OK);
 	}
 	
 	//localhost:8080/duck/alt?id=1 		(Eg)
 	//getting a specific duck
 	@GetMapping("/alt")
-	public ResponseEntity<Demo> getDuckByIdAlt(@PathParam("id") int id) throws Exception{
-		Demo demo = demoService.readById(id);
-		return new ResponseEntity<Demo>(demo, HttpStatus.OK);
+	public ResponseEntity<DemoDTO> getDuckByIdAlt(@PathParam("id") int id) throws Exception{
+		DemoDTO demo = demoService.readById(id);
+		return new ResponseEntity<DemoDTO>(demo, HttpStatus.OK);
 	}
+	
+	@GetMapping("/name/{name}")
+	public ResponseEntity<DemoDTO> getDemoByname(@PathVariable("name") String name) {
+		DemoDTO demo = demoService.readByName(name);
+		return new ResponseEntity<DemoDTO>(demo, HttpStatus.OK);
+	}	
+
 	
 	//creating a new duck
 	@PostMapping
-	public ResponseEntity<Demo> createDemo(@RequestBody Demo demo){
-		Demo newDemo = demoService.createDemo(demo);
+	public ResponseEntity<DemoDTO> createDemo(@RequestBody Demo demo){
+		DemoDTO newDemo = demoService.createDemo(demo);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Location", String.valueOf(newDemo.getId()));
-		return new ResponseEntity<Demo>(demo, headers, HttpStatus.CREATED);
+		
+		return new ResponseEntity<DemoDTO>(newDemo, headers, HttpStatus.CREATED);
 	}
 	
 	@PatchMapping("/update/{id}")
-	public ResponseEntity<Demo> updateDemo(@PathVariable("id") int id, @RequestBody Demo demo){
-		Demo updateDemo = demoService.updateDemo(id, demo);
+	public ResponseEntity<DemoDTO> updateDemo(@PathVariable("id") int id, @RequestBody Demo demo){
+		DemoDTO updateDemo = demoService.updateDemo(id, demo);
 		
-		return new ResponseEntity<Demo>(updateDemo, HttpStatus.OK);
+		return new ResponseEntity<DemoDTO>(updateDemo, HttpStatus.OK);
 		
 	}
 	
