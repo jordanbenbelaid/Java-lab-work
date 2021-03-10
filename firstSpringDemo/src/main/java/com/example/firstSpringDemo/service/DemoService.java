@@ -22,7 +22,7 @@ public class DemoService {
 	// data access object
 	private DemoRepository demoRepository;
 	private DemoMapper demoMapper;
-
+	
 	@Autowired
 	public DemoService(DemoRepository demoRepository, DemoMapper demoMapper) {
 		this.demoRepository = demoRepository;

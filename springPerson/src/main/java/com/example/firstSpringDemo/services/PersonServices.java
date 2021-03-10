@@ -42,8 +42,8 @@ public class PersonServices {
 		return newPerson;
 	}
 	
-	public Person updatePerson(Person person) {
-		Optional<Person> optionalPerson = personRepository.findById(person.getId());
+	public Person updatePerson(int id, Person person) {
+		Optional<Person> optionalPerson = personRepository.findById(id);
 		Person updatedPerson;
 		
 		if(optionalPerson.isPresent()) {
