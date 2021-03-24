@@ -39,7 +39,7 @@ public class PondController {
 		return new ResponseEntity<List<Pond>>(data, HttpStatus.OK);
 	}
 	
-	//creating a new duck
+	//creating a new pond
 		@PostMapping
 		public ResponseEntity<Pond> createPond(@RequestBody Pond pond){
 			Pond newPond = pondService.createPond(pond);

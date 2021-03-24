@@ -1,0 +1,138 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 2344005300,
+              "status": "passed"
+            },
+            "match": {
+              "location": "GoogleKittens.init()"
+            }
+          },
+          {
+            "result": {
+              "duration": 1284293400,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Shopping.init()"
+            }
+          }
+        ],
+        "line": 3,
+        "name": "Shopping",
+        "description": "",
+        "id": "buy-something;shopping",
+        "after": [
+          {
+            "result": {
+              "duration": 671560900,
+              "status": "passed"
+            },
+            "match": {
+              "location": "GoogleKittens.tearDown()"
+            }
+          },
+          {
+            "result": {
+              "duration": 734242300,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Shopping.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2374361200,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I can access a site",
+            "match": {
+              "location": "Shopping.i_can_access_a_site(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "site"
+                ],
+                "line": 5
+              },
+              {
+                "cells": [
+                  "https://www.amazon.co.uk"
+                ],
+                "line": 6
+              },
+              {
+                "cells": [
+                  "https://www.ebay.co.uk"
+                ],
+                "line": 7
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 6435399400,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I search for clothes",
+            "match": {
+              "location": "Shopping.i_search_for_clothes(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "clothes"
+                ],
+                "line": 9
+              },
+              {
+                "cells": [
+                  "Jumpers"
+                ],
+                "line": 10
+              },
+              {
+                "cells": [
+                  "Jeans"
+                ],
+                "line": 11
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 70399000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I will buy something",
+            "match": {
+              "location": "Shopping.i_will_buy_something()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Buy something",
+    "description": "",
+    "id": "buy-something",
+    "keyword": "Feature",
+    "uri": "src/test/resources/cuke/shopping.feature"
+  }
+]
